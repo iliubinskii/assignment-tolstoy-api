@@ -8,6 +8,10 @@ export const HTTP_ERROR = {
     errorCode: "InternalServerError",
     errorMessage: "Internal Server Error"
   },
+  InvalidData: {
+    errorCode: "InvalidData",
+    errorMessage: "Invalid Data"
+  },
   NotFound: {
     errorCode: "NotFound",
     errorMessage: "Not Found"

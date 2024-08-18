@@ -1,1 +1,2 @@
-export { logger } from "./logger";
+export * from "./fetch-metadata";
+export * from "./logger";
