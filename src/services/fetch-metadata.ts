@@ -1,4 +1,5 @@
 import { ERROR, ERROR_RESPONSE } from "../consts";
+import type { FetchMetadataResponse } from "../schema";
 import fetch from "node-fetch";
 import { load } from "cheerio";
 import { logger } from "./logger";
@@ -58,18 +59,4 @@ export async function fetchMetadataBatch(
   urls: readonly string[]
 ): Promise<readonly FetchMetadataResponse[]> {
   return Promise.all(urls.map(async url => fetchMetadata(url)));
-}
-
-export interface FetchMetadataError {
-  readonly errorCode: string;
-  readonly errorMessage: string;
-}
-
-export type FetchMetadataResponse = Metadata | FetchMetadataError;
-
-export interface Metadata {
-  readonly description?: string | undefined;
-  readonly imageUrl?: string | undefined;
-  readonly title?: string | undefined;
-  readonly url: string;
 }
