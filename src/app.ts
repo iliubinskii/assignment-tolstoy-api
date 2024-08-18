@@ -33,6 +33,7 @@ export function createApp(): express.Express {
     })
   );
   app.use(helmet());
+  app.use(express.static("public"));
 
   app.post(
     "/fetch-metadata",
