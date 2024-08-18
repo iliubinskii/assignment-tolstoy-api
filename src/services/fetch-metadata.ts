@@ -1,20 +1,52 @@
+import { ERROR, HTTP_ERROR } from "../consts";
+import fetch from "node-fetch";
+import { load } from "cheerio";
+import { logger } from "./logger";
+
 /**
  * Fetch metadata for a URL.
  * @param url - URL.
  * @returns Metadata.
  */
-// eslint-disable-next-line @typescript-eslint/require-await -- Temp
 export async function fetchMetadata(
   url: string
 ): Promise<FetchMetadataResponse> {
-  // eslint-disable-next-line no-warning-comments -- Postponed
-  // TODO: Implement fetching metadata
-  return {
-    description: "Description",
-    imageUrl: "http://image.url",
-    title: "Title",
-    url
-  };
+  try {
+    const response = await fetch(url);
+
+    const html = await response.text();
+
+    const $ = load(html);
+
+    const title =
+      $('meta[property="og:title"]').attr("content") ?? $("title").text();
+
+    const description =
+      $('meta[property="og:description"]').attr("content") ??
+      $('meta[name="description"]').attr("content");
+
+    const imageUrl =
+      $('meta[property="og:image"]').attr("content") ??
+      $('link[rel="icon"]').attr("href") ??
+      $('link[rel="shortcut icon"]').attr("href") ??
+      $('link[rel="apple-touch-icon"]').attr("href");
+
+    return {
+      description,
+      imageUrl,
+      title,
+      url
+    };
+  } catch (err) {
+    logger.warn(ERROR.MetadataFetchingError, err);
+
+    return err instanceof Error
+      ? {
+          errorCode: HTTP_ERROR.MetadataFetchingError.errorCode,
+          errorMessage: err.message
+        }
+      : HTTP_ERROR.MetadataFetchingError;
+  }
 }
 
 /**
@@ -29,14 +61,15 @@ export async function fetchMetadataBatch(
 }
 
 export interface FetchMetadataError {
-  readonly error: string;
+  readonly errorCode: string;
+  readonly errorMessage: string;
 }
 
 export type FetchMetadataResponse = Metadata | FetchMetadataError;
 
 export interface Metadata {
-  readonly description: string;
-  readonly imageUrl: string;
-  readonly title: string;
+  readonly description?: string | undefined;
+  readonly imageUrl?: string | undefined;
+  readonly title?: string | undefined;
   readonly url: string;
 }

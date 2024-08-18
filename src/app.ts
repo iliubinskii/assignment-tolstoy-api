@@ -63,4 +63,6 @@ export function createApp(): express.Express {
   return app;
 }
 
+// eslint-disable-next-line no-warning-comments -- Postponed
+// TODO: URL validation
 const FetchMetadataRequestValidationSchema = zod.array(zod.string()).nonempty();

@@ -1,6 +1,7 @@
 export const ERROR = {
   FailedToStartServer: "Failed to start server",
-  InternalServerError: "Internal server error"
+  InternalServerError: "Internal server error",
+  MetadataFetchingError: "Failed to fetch metadata"
 } as const;
 
 export const HTTP_ERROR = {
@@ -11,6 +12,10 @@ export const HTTP_ERROR = {
   InvalidData: {
     errorCode: "InvalidData",
     errorMessage: "Invalid Data"
+  },
+  MetadataFetchingError: {
+    errorCode: "MetadataFetchingError",
+    errorMessage: "Failed to fetch metadata"
   },
   NotFound: {
     errorCode: "NotFound",
