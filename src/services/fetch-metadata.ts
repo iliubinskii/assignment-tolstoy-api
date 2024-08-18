@@ -1,4 +1,4 @@
-import { ERROR, HTTP_ERROR } from "../consts";
+import { ERROR, ERROR_RESPONSE } from "../consts";
 import fetch from "node-fetch";
 import { load } from "cheerio";
 import { logger } from "./logger";
@@ -42,10 +42,10 @@ export async function fetchMetadata(
 
     return err instanceof Error
       ? {
-          errorCode: HTTP_ERROR.MetadataFetchingError.errorCode,
+          errorCode: ERROR_RESPONSE.MetadataFetchingError.errorCode,
           errorMessage: err.message
         }
-      : HTTP_ERROR.MetadataFetchingError;
+      : ERROR_RESPONSE.MetadataFetchingError;
   }
 }
 

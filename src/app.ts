@@ -1,4 +1,4 @@
-import { ERROR, HTTP_ERROR, HTTP_HEALTH_STATUS } from "./consts";
+import { ERROR, ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
 import type { NextFunction, Request, Response } from "express";
 import { fetchMetadataBatch, logger } from "./services";
 import { StatusCodes } from "http-status-codes";
@@ -27,7 +27,7 @@ export function createApp(): express.Express {
           res.json(metadata);
         } else
           res.status(StatusCodes.BAD_REQUEST).json({
-            ...HTTP_ERROR.InvalidData,
+            ...ERROR_RESPONSE.InvalidData,
             details: urls.error.formErrors
           });
       } catch (err) {
@@ -37,11 +37,11 @@ export function createApp(): express.Express {
   );
 
   app.get("/health", (_req, res) => {
-    res.json(HTTP_HEALTH_STATUS.Ok);
+    res.json(SUCCESS_RESPONSE.ServerIsHealthy);
   });
 
   app.all("*", (_req, res) => {
-    res.status(StatusCodes.NOT_FOUND).json(HTTP_ERROR.NotFound);
+    res.status(StatusCodes.NOT_FOUND).json(ERROR_RESPONSE.NotFound);
   });
 
   app.use(
@@ -56,7 +56,7 @@ export function createApp(): express.Express {
       logger.error(ERROR.InternalServerError, err);
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json(HTTP_ERROR.InternalServerError);
+        .json(ERROR_RESPONSE.InternalServerError);
     }
   );
 

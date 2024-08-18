@@ -1,4 +1,4 @@
-import { HTTP_ERROR, HTTP_HEALTH_STATUS } from "./consts";
+import { ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
 import { describe, expect, it } from "@jest/globals";
 import { StatusCodes } from "http-status-codes";
 import { createApp } from "./app";
@@ -11,7 +11,7 @@ describe("Express App", () => {
     const response = await request(app).get("/unknown-route");
 
     expect(response.status).toBe(StatusCodes.NOT_FOUND);
-    expect(response.body).toEqual(HTTP_ERROR.NotFound);
+    expect(response.body).toEqual(ERROR_RESPONSE.NotFound);
     expect(true).toBeTrue();
   });
 
@@ -22,7 +22,7 @@ describe("Express App", () => {
       const response = await request(app).get("/health");
 
       expect(response.status).toBe(StatusCodes.OK);
-      expect(response.body).toEqual(HTTP_HEALTH_STATUS.Ok);
+      expect(response.body).toEqual(SUCCESS_RESPONSE.ServerIsHealthy);
     });
   });
 });

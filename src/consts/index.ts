@@ -1,36 +1,39 @@
 export const ERROR = {
   FailedToStartServer: "Failed to start server",
   InternalServerError: "Internal server error",
-  MetadataFetchingError: "Failed to fetch metadata"
+  InvalidData: "Invalid data",
+  MetadataFetchingError: "Failed to fetch metadata",
+  NotFound: "Not found"
 } as const;
 
-export const HTTP_ERROR = {
+export const ERROR_RESPONSE = {
   InternalServerError: {
     errorCode: "InternalServerError",
-    errorMessage: "Internal Server Error"
+    errorMessage: ERROR.InternalServerError
   },
   InvalidData: {
     errorCode: "InvalidData",
-    errorMessage: "Invalid Data"
+    errorMessage: ERROR.InvalidData
   },
   MetadataFetchingError: {
     errorCode: "MetadataFetchingError",
-    errorMessage: "Failed to fetch metadata"
+    errorMessage: ERROR.MetadataFetchingError
   },
   NotFound: {
     errorCode: "NotFound",
-    errorMessage: "Not Found"
-  }
-} as const;
-
-export const HTTP_HEALTH_STATUS = {
-  Ok: {
-    description: "Server is healthy",
-    status: "Ok"
+    errorMessage: ERROR.NotFound
   }
 } as const;
 
 export const SUCCESS = {
+  ServerIsHealthy: "Server is healthy",
   ServerStarted: "Server started",
   ServerStartedOnPort: "Server started on port"
+} as const;
+
+export const SUCCESS_RESPONSE = {
+  ServerIsHealthy: {
+    description: SUCCESS.ServerIsHealthy,
+    status: "ServerIsHealthy"
+  }
 } as const;
