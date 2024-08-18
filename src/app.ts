@@ -1,9 +1,11 @@
+import { CORS_ORIGIN, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config";
 import { ERROR, ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
 import type { NextFunction, Request, Response } from "express";
-import { RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config";
 import { fetchMetadataBatch, logger } from "./services";
 import { StatusCodes } from "http-status-codes";
+import cors from "cors";
 import express, { json } from "express";
+import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import zod from "zod";
 
@@ -23,8 +25,14 @@ export function createApp(): express.Express {
       windowMs: RATE_LIMIT_WINDOW_MS
     })
   );
-
   app.use(json());
+  app.use(
+    cors({
+      optionsSuccessStatus: StatusCodes.OK,
+      origin: CORS_ORIGIN
+    })
+  );
+  app.use(helmet());
 
   app.post(
     "/fetch-metadata",
