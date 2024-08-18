@@ -4,6 +4,7 @@ export const ERROR = {
   InvalidData: "Invalid data",
   MetadataFetchingError: "Failed to fetch metadata",
   NotFound: "Not found",
+  ToManyRequests: "Too many requests from this IP, please try again later",
   UrlListIsEmpty: "URL list is empty",
   UrlListIsNotProvided: "URL list is not provided"
 } as const;
@@ -24,6 +25,10 @@ export const ERROR_RESPONSE = {
   NotFound: {
     errorCode: "NotFound",
     errorMessage: ERROR.NotFound
+  },
+  ToManyRequests: {
+    errorCode: "ToManyRequests",
+    errorMessage: ERROR.ToManyRequests
   }
 } as const;
 

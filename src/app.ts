@@ -1,8 +1,10 @@
 import { ERROR, ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
 import type { NextFunction, Request, Response } from "express";
+import { RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config";
 import { fetchMetadataBatch, logger } from "./services";
 import { StatusCodes } from "http-status-codes";
 import express, { json } from "express";
+import rateLimit from "express-rate-limit";
 import zod from "zod";
 
 /**
@@ -11,6 +13,16 @@ import zod from "zod";
  */
 export function createApp(): express.Express {
   const app = express();
+
+  app.use(
+    rateLimit({
+      legacyHeaders: false,
+      max: RATE_LIMIT_MAX,
+      message: ERROR_RESPONSE.ToManyRequests,
+      standardHeaders: true,
+      windowMs: RATE_LIMIT_WINDOW_MS
+    })
+  );
 
   app.use(json());
 
