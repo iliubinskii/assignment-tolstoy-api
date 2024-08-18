@@ -3,7 +3,9 @@ export const ERROR = {
   InternalServerError: "Internal server error",
   InvalidData: "Invalid data",
   MetadataFetchingError: "Failed to fetch metadata",
-  NotFound: "Not found"
+  NotFound: "Not found",
+  UrlListIsEmpty: "URL list is empty",
+  UrlListIsNotProvided: "URL list is not provided"
 } as const;
 
 export const ERROR_RESPONSE = {
