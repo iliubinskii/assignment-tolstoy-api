@@ -1,7 +1,7 @@
-import { ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
+import { ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts/index.js";
 import { describe, expect, it } from "@jest/globals";
 import { StatusCodes } from "http-status-codes";
-import { createApp } from "./app";
+import { createApp } from "./app.js";
 import request from "supertest";
 
 describe("Express App", () => {

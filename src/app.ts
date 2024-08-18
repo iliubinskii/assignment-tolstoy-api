@@ -1,7 +1,11 @@
-import { CORS_ORIGIN, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS } from "./config";
-import { ERROR, ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts";
+import {
+  CORS_ORIGIN,
+  RATE_LIMIT_MAX,
+  RATE_LIMIT_WINDOW_MS
+} from "./config/index.js";
+import { ERROR, ERROR_RESPONSE, SUCCESS_RESPONSE } from "./consts/index.js";
 import type { NextFunction, Request, Response } from "express";
-import { fetchMetadataBatch, logger } from "./services";
+import { fetchMetadataBatch, logger } from "./services/index.js";
 import { StatusCodes } from "http-status-codes";
 import cors from "cors";
 import express, { json } from "express";

@@ -18,6 +18,9 @@ const config = {
       statements: 10
     }
   },
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
+  },
   preset: "ts-jest",
   setupFilesAfterEnv: ["./jest.setup-after-env.tsx"],
   testEnvironment: "node",

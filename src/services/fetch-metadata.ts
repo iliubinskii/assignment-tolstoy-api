@@ -1,9 +1,8 @@
-import { ERROR, ERROR_RESPONSE } from "../consts";
-import type { FetchMetadataResponse } from "../schema";
+import { ERROR, ERROR_RESPONSE } from "../consts/index.js";
+import type { FetchMetadataResponse } from "../schema/index.js";
 import { URL } from "node:url";
-import fetch from "node-fetch";
 import { load } from "cheerio";
-import { logger } from "./logger";
+import { logger } from "./logger.js";
 
 /**
  * Fetch metadata for a URL.

@@ -1,4 +1,4 @@
-import { ERROR, PORT, SUCCESS, createApp, logger } from "../src";
+import { ERROR, PORT, SUCCESS, createApp, logger } from "../src/index.js";
 
 try {
   startServer();

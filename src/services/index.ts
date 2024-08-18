@@ -1,2 +1,2 @@
-export * from "./fetch-metadata";
-export * from "./logger";
+export * from "./fetch-metadata.js";
+export * from "./logger.js";

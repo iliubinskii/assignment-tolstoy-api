@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { SUCCESS, createApp, logger } from "../src";
+import { SUCCESS, createApp, logger } from "../src/index.js";
 import type express from "express";
 
 // Cache the app in serverless environments
