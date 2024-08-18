@@ -26,11 +26,7 @@ export async function fetchMetadata(
       $('meta[property="og:description"]').attr("content") ??
       $('meta[name="description"]').attr("content");
 
-    const imageUrl =
-      $('meta[property="og:image"]').attr("content") ??
-      $('link[rel="icon"]').attr("href") ??
-      $('link[rel="shortcut icon"]').attr("href") ??
-      $('link[rel="apple-touch-icon"]').attr("href");
+    const imageUrl = $('link[rel="icon"]').attr("href");
 
     return {
       description,
@@ -44,9 +40,13 @@ export async function fetchMetadata(
     return err instanceof Error
       ? {
           errorCode: ERROR_RESPONSE.MetadataFetchingError.errorCode,
-          errorMessage: err.message
+          errorMessage: err.message,
+          url
         }
-      : ERROR_RESPONSE.MetadataFetchingError;
+      : {
+          ...ERROR_RESPONSE.MetadataFetchingError,
+          url
+        };
   }
 }
 

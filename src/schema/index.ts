@@ -12,6 +12,7 @@ export interface ErrorResponse {
 export interface FetchMetadataError {
   readonly errorCode: string;
   readonly errorMessage: string;
+  readonly url: string;
 }
 
 export type FetchMetadataResponse = Metadata | FetchMetadataError;
