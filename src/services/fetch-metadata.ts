@@ -1,5 +1,6 @@
 import { ERROR, ERROR_RESPONSE } from "../consts";
 import type { FetchMetadataResponse } from "../schema";
+import { URL } from "node:url";
 import fetch from "node-fetch";
 import { load } from "cheerio";
 import { logger } from "./logger";
@@ -26,7 +27,17 @@ export async function fetchMetadata(
       $('meta[property="og:description"]').attr("content") ??
       $('meta[name="description"]').attr("content");
 
-    const imageUrl = $('link[rel="icon"]').attr("href");
+    const imageUrl = (() => {
+      const rawUrl = $('link[rel="icon"]').attr("href");
+
+      if (rawUrl) {
+        const baseUrl = new URL(url);
+
+        return new URL(rawUrl, baseUrl).toString();
+      }
+
+      return undefined;
+    })();
 
     return {
       description,
