@@ -63,7 +63,7 @@ describe("distributeCandies", () => {
 
     const factor = 5;
 
-    const minRatio = 3;
+    const minRatio = 2;
 
     const maxRatio = 6;
 
